@@ -1,7 +1,7 @@
 Package: rartenfinder
 Type: Package
 Title: R Client for the artenfinder API (http://artenfinder.rlp.de)
-Version: 0.1.0
+Version: 0.1.0.9000
 Author: Eduard Szöcs
 Maintainer: Eduard Szöcs <eduardszoecs@gmail.com>
 Description: R Client for the artenfinder API (http://artenfinder.rlp.de)
