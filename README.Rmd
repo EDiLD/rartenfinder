@@ -35,14 +35,42 @@ devtools::install_github("EDiLD/rartenfinder")
 
 ```{r}
 library('rartenfinder')
-library('magrittr')
+library('dplyr')
 ```
 
-## taxagroups
+## Usage
 
-This is a basic example which shows you how to solve a common problem:
+### Query metadata
+
+#### Available taxagroups
 
 ```{r taxagroups}
 get_taxagroups() %>%
   head()
 ```
+
+#### Available taxa
+
+List all available taxa
+```{r}
+get_taxa() %>%
+  head() %>%
+  select(-eu_guid, gid)
+```
+
+Query taxa by regex:
+```{r}
+get_taxa(name_regexp_ci = '^Udea.*$') %>%
+  head() %>%
+  select(-eu_guid, gid)
+```
+
+
+Query taxa by group
+```{r}
+get_taxa(taxagroup = 'Flechten') %>%
+  head() %>%
+  select(-eu_guid, gid)
+```
+
+

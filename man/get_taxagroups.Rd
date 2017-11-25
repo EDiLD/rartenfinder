@@ -8,15 +8,19 @@ get_taxagroups(is_animal = NULL)
 }
 \arguments{
 \item{is_animal}{logical; should animals (TRUE) or plants (FALSE) be queried.
-NULL (default returns both)}
+NULL (default returns both).}
 }
 \value{
-a data.frame with id, name_deutsch (german name), and is_animal
+a data.frame with id (OSIRIS taxagroup ID), name_deutsch (german name), and is_animal.
 }
 \description{
 Query available taxagroups
 }
+\note{
+A maximum of 1000 entries is returned.
+}
 \examples{
 get_taxagroups()
+get_taxagroups(is_animal = FALSE)
 
 }

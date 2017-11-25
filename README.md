@@ -18,13 +18,23 @@ devtools::install_github("EDiLD/rartenfinder")
 
 ``` r
 library('rartenfinder')
-library('magrittr')
+library('dplyr')
+#> 
+#> Attaching package: 'dplyr'
+#> The following objects are masked from 'package:stats':
+#> 
+#>     filter, lag
+#> The following objects are masked from 'package:base':
+#> 
+#>     intersect, setdiff, setequal, union
 ```
 
-taxagroups
-----------
+Usage
+-----
 
-This is a basic example which shows you how to solve a common problem:
+### Query metadata
+
+#### Available taxagroups
 
 ``` r
 get_taxagroups() %>%
@@ -36,4 +46,58 @@ get_taxagroups() %>%
 #> 4 24          Zweiflügler      TRUE
 #> 5 23          Netzflügler      TRUE
 #> 6 22               Wanzen      TRUE
+```
+
+#### Available taxa
+
+List all available taxa
+
+``` r
+get_taxa() %>%
+  head() %>%
+  select(-eu_guid, gid)
+#>       id  name_wissenschaftlich name_deutsch artengruppe gid is_animal
+#> 1 800290     Zophodia graciella         <NA> Nachtfalter  26      TRUE
+#> 2 800289 Xanthocrambus lucellus         <NA> Nachtfalter  26      TRUE
+#> 3 800288       Vitula edmandsii         <NA> Nachtfalter  26      TRUE
+#> 4 800287      Udea uliginosalis         <NA> Nachtfalter  26      TRUE
+#> 5 800286         Udea nebulalis         <NA> Nachtfalter  26      TRUE
+#> 6 800285         Udea murinalis         <NA> Nachtfalter  26      TRUE
+```
+
+Query taxa by regex:
+
+``` r
+get_taxa(name_regexp_ci = '^Udea.*$') %>%
+  head() %>%
+  select(-eu_guid, gid)
+#>       id name_wissenschaftlich name_deutsch artengruppe gid is_animal
+#> 1 800287     Udea uliginosalis         <NA> Nachtfalter  26      TRUE
+#> 2 800286        Udea nebulalis         <NA> Nachtfalter  26      TRUE
+#> 3 800285        Udea murinalis         <NA> Nachtfalter  26      TRUE
+#> 4 800284     Udea inquinatalis         <NA> Nachtfalter  26      TRUE
+#> 5 800283         Udea fulvalis         <NA> Nachtfalter  26      TRUE
+#> 6 800282         Udea elutalis         <NA> Nachtfalter  26      TRUE
+```
+
+Query taxa by group
+
+``` r
+get_taxa(taxagroup = 'Flechten') %>%
+  head() %>%
+  select(-eu_guid, gid)
+#>       id name_wissenschaftlich       name_deutsch artengruppe gid
+#> 1 800011       n.n. (Lichenes) unbekannte Flechte    Flechten   3
+#> 2 176286   Parmotrema crinitum               <NA>    Flechten   3
+#> 3 147261  Cladonia rangiformis               <NA>    Flechten   3
+#> 4 147260  Cladonia rangiferina               <NA>    Flechten   3
+#> 5 147253   Cladonia portentosa               <NA>    Flechten   3
+#> 6 147238      Cladonia humilis               <NA>    Flechten   3
+#>   is_animal
+#> 1     FALSE
+#> 2     FALSE
+#> 3     FALSE
+#> 4     FALSE
+#> 5     FALSE
+#> 6     FALSE
 ```
