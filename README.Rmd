@@ -1,0 +1,31 @@
+---
+output:
+  md_document:
+    variant: markdown_github
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/<USERNAME>/<REPO>?branch=master&svg=true)](https://ci.appveyor.com/project/<USERNAME>/<REPO>)
+[![Travis-CI Build Status](https://travis-ci.org/<USERNAME>/<REPO>.svg?branch=master)](https://travis-ci.org/<USERNAME>/<REPO>)
+[![Coverage Status](https://img.shields.io/codecov/c/github/<USERNAME>/<REPO>/master.svg)](https://codecov.io/github/<USERNAME>/<REPO>?branch=master)
+
+# rartenfinder
+
+R Client for the artenfinder API (http://artenfinder.rlp.de)
+
+## taxagroups
+
+This is a basic example which shows you how to solve a common problem:
+
+```{r taxagroups}
+get_taxagroups()
+```
