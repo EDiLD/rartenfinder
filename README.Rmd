@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/<USERNAME>/<REPO>?branch=master&svg=true)](https://ci.appveyor.com/project/EDiLD/rartenfinder)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/EDiLD/rartenfinder?branch=master&svg=true)](https://ci.appveyor.com/project/EDiLD/rartenfinder)
 [![Travis-CI Build Status](https://travis-ci.org/EDiLD/rartenfinder.svg?branch=master)](https://travis-ci.org/EDiLD/rartenfinder)
 [![Coverage Status](https://img.shields.io/codecov/c/github/EDiLD/rartenfinder/master.svg)](https://codecov.io/github/EDiLD/rartenfinder?branch=master)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/rartenfinder)](https://cran.r-project.org/package=rartenfinder)
@@ -23,10 +23,26 @@ knitr::opts_chunk$set(
 
 R Client for the artenfinder API (http://artenfinder.rlp.de)
 
+
+## Installation
+
+### Development version from GitHub
+
+```{r eval=FALSE}
+install.packages("devtools")
+devtools::install_github("EDiLD/rartenfinder")
+```
+
+```{r}
+library('rartenfinder')
+library('magrittr')
+```
+
 ## taxagroups
 
 This is a basic example which shows you how to solve a common problem:
 
 ```{r taxagroups}
-get_taxagroups()
+get_taxagroups() %>%
+  head()
 ```
