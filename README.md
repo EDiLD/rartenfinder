@@ -50,12 +50,13 @@ get_taxagroups() %>%
 
 #### Available taxa
 
-List all available taxa
+##### List all available taxa
 
 ``` r
 get_taxa() %>%
   head() %>%
   select(-eu_guid, gid)
+#> Warning in get_taxa(): Limit of 1000 reached. Not all records are returned.
 #>       id  name_wissenschaftlich name_deutsch artengruppe gid is_animal
 #> 1 800290     Zophodia graciella         <NA> Nachtfalter  26      TRUE
 #> 2 800289 Xanthocrambus lucellus         <NA> Nachtfalter  26      TRUE
@@ -65,7 +66,7 @@ get_taxa() %>%
 #> 6 800285         Udea murinalis         <NA> Nachtfalter  26      TRUE
 ```
 
-Query taxa by regex:
+##### Query taxa by regex:
 
 ``` r
 get_taxa(name_regexp_ci = '^Udea.*$') %>%
@@ -80,24 +81,49 @@ get_taxa(name_regexp_ci = '^Udea.*$') %>%
 #> 6 800282         Udea elutalis         <NA> Nachtfalter  26      TRUE
 ```
 
-Query taxa by group
+##### Query taxa by group
 
 ``` r
 get_taxa(taxagroup = 'Flechten') %>%
   head() %>%
-  select(-eu_guid, gid)
-#>       id name_wissenschaftlich       name_deutsch artengruppe gid
-#> 1 800011       n.n. (Lichenes) unbekannte Flechte    Flechten   3
-#> 2 176286   Parmotrema crinitum               <NA>    Flechten   3
-#> 3 147261  Cladonia rangiformis               <NA>    Flechten   3
-#> 4 147260  Cladonia rangiferina               <NA>    Flechten   3
-#> 5 147253   Cladonia portentosa               <NA>    Flechten   3
-#> 6 147238      Cladonia humilis               <NA>    Flechten   3
-#>   is_animal
-#> 1     FALSE
-#> 2     FALSE
-#> 3     FALSE
-#> 4     FALSE
-#> 5     FALSE
-#> 6     FALSE
+  select(-eu_guid, -gid)
+#>       id name_wissenschaftlich       name_deutsch artengruppe is_animal
+#> 1 800011       n.n. (Lichenes) unbekannte Flechte    Flechten     FALSE
+#> 2 176286   Parmotrema crinitum               <NA>    Flechten     FALSE
+#> 3 147261  Cladonia rangiformis               <NA>    Flechten     FALSE
+#> 4 147260  Cladonia rangiferina               <NA>    Flechten     FALSE
+#> 5 147253   Cladonia portentosa               <NA>    Flechten     FALSE
+#> 6 147238      Cladonia humilis               <NA>    Flechten     FALSE
+```
+
+### Query observations
+
+``` r
+get_observations(scientific_name = 'milvus milvus', year = 2017) %>%
+  head() %>%
+  select(id, lat, lon, datum)
+#>         id     lat    lon      datum
+#> 1 54371700 5480733 404552 2017-11-23
+#> 2 54371264 5482113 420267 2017-11-23
+#> 3 54368615 5595993 409444 2017-08-12
+#> 4 54368614 5595703 409038 2017-07-01
+#> 5 54368613 5595600 408678 2017-09-22
+#> 6 54368612 5595865 409002 2017-09-30
+```
+
+### Plotting
+
+#### Phenogram
+
+``` r
+df <- get_observations(scientific_name = 'Gonepteryx rhamni', year = 2017)
+plot_phaenogram(df, 'weekly')
+```
+
+![](README_files/figure-markdown_github/phenogram-1.png)
+
+#### Interactive map
+
+``` r
+plot_mapview(df)
 ```

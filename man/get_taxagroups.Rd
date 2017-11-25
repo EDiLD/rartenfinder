@@ -4,11 +4,13 @@
 \alias{get_taxagroups}
 \title{Query available taxagroups}
 \usage{
-get_taxagroups(is_animal = NULL)
+get_taxagroups(is_animal = NULL, limit = 1000)
 }
 \arguments{
 \item{is_animal}{logical; should animals (TRUE) or plants (FALSE) be queried.
 NULL (default returns both).}
+
+\item{limit}{numeric; Number of observations to retrieve (max 1000).}
 }
 \value{
 a data.frame with id (OSIRIS taxagroup ID), name_deutsch (german name), and is_animal.

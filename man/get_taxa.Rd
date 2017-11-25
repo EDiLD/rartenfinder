@@ -2,10 +2,10 @@
 % Please edit documentation in R/metadata.R
 \name{get_taxa}
 \alias{get_taxa}
-\title{Query available taxa}
+\title{Query and Search available taxa}
 \usage{
 get_taxa(is_animal = NULL, taxagroup = NULL, gid = NULL,
-  name_regexp_ci = NULL)
+  name_regexp_ci = NULL, limit = 1000)
 }
 \arguments{
 \item{is_animal}{logical; should animals (TRUE) or plants (FALSE) be queried.
@@ -16,18 +16,22 @@ NULL (default returns both).}
 \item{gid}{numeric; filter by OSIRIS taxagroup ID (e.g. from \code{\link{get_taxagroups}}).}
 
 \item{name_regexp_ci}{character; a Regular Expression  (POSIX, Case Insensitive) to filter german or scientific name}
+
+\item{limit}{numeric; Number of observations to retrieve (max 1000).}
 }
 \value{
 a data.frame with id, eu_guid, name_wissenschaftlich (scientific name),
     name_deutsch (german name), artengruppe (taxagroup-name), gid (taxagroup id), is_animal
 }
 \description{
-Query available taxa
+Query and Search available taxa
 }
 \note{
 A maximum of 1000 entries is returned.
 }
 \examples{
 get_taxa()
+# search for taxa beginning with Udea
+get_taxa(name_regexp_ci = '^Udea.*$')
 
 }

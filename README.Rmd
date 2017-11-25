@@ -9,8 +9,7 @@ output:
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>",
-  fig.path = "README-"
+  comment = "#>"
 )
 ```
 
@@ -51,26 +50,47 @@ get_taxagroups() %>%
 
 #### Available taxa
 
-List all available taxa
-```{r}
+##### List all available taxa
+```{r taxa}
 get_taxa() %>%
   head() %>%
   select(-eu_guid, gid)
 ```
 
-Query taxa by regex:
-```{r}
+##### Query taxa by regex:
+```{r taxa_regex}
 get_taxa(name_regexp_ci = '^Udea.*$') %>%
   head() %>%
   select(-eu_guid, gid)
 ```
 
 
-Query taxa by group
-```{r}
+##### Query taxa by group
+```{r taxa_group}
 get_taxa(taxagroup = 'Flechten') %>%
   head() %>%
-  select(-eu_guid, gid)
+  select(-eu_guid, -gid)
+```
+
+
+### Query observations
+```{r observations}
+get_observations(scientific_name = 'milvus milvus', year = 2017) %>%
+  head() %>%
+  select(id, lat, lon, datum)
+```
+
+### Plotting
+
+#### Phenogram
+```{r phenogram}
+df <- get_observations(scientific_name = 'Gonepteryx rhamni', year = 2017)
+plot_phaenogram(df, 'weekly')
+```
+
+#### Interactive map
+```{r eval=FALSE}
+plot_mapview(df)
 ```
 
 
